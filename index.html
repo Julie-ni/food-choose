@@ -32,6 +32,11 @@
             border-radius: 12px;
             cursor: pointer;
         }
+        food-image {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -144,10 +149,8 @@
 
             if (food.image) {
                 document.getElementById("result").innerHTML =
-                    '<img src="' + food.image + '" width="60" style="vertical-align: middle; margin-right: 10px;">' + food.name;
-            } else {
-                document.getElementById("result").textContent = food.emoji + " " + food.name;
-            }
+                    '<img src="' + food.image + '" class="food-image">' + food.name; }
+            else { document.getElementById("result").textContent = food.emoji + " " + food.name; }
         }
 
     </script>
