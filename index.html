@@ -152,7 +152,8 @@
 
             if (food.image) {
                 document.getElementById("result").innerHTML =
-                    '<img src="' + food.image + '" class="food-image">' + '<div class="food-name">' + food.name + '</div>';
+                    '<img src="' + food.image + '" class="food-image">' + 
+                    '<div class="food-name">' + food.name + '</div>';
             } else {
                 document.getElementById("result").textContent = 
                     food.emoji + " " + food.name;
