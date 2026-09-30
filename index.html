@@ -32,7 +32,7 @@
             border-radius: 12px;
             cursor: pointer;
         }
-        food-image {
+        .food-image {
             width: 180px;
             height: 180px;
             object-fit: contain;
@@ -149,8 +149,11 @@
 
             if (food.image) {
                 document.getElementById("result").innerHTML =
-                    '<img src="' + food.image + '" class="food-image">' + food.name; }
-            else { document.getElementById("result").textContent = food.emoji + " " + food.name; }
+                    '<img src="' + food.image + '" class="food-image">' + food.name;
+            } else {
+                document.getElementById("result").textContent = 
+                    food.emoji + " " + food.name;
+            }
         }
 
     </script>
