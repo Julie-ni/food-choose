@@ -37,6 +37,9 @@
             height: 180px;
             object-fit: contain;
         }
+        .food-name {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -141,7 +144,7 @@
         name: "飯糰",
         image: "ONIGIRIPLANET.jpg"
     }
-];
+        ];
         function chooseFood() {
             const randomIndex = Math.floor(Math.random() * foods.length);
 
@@ -149,7 +152,7 @@
 
             if (food.image) {
                 document.getElementById("result").innerHTML =
-                    '<img src="' + food.image + '" class="food-image">' + food.name;
+                    '<img src="' + food.image + '" class="food-image">' + '<div class="food-name">' + food.name + '</div>';
             } else {
                 document.getElementById("result").textContent = 
                     food.emoji + " " + food.name;
