@@ -146,19 +146,36 @@
     }
         ];
         function chooseFood() {
-            const randomIndex = Math.floor(Math.random() * foods.length);
 
-            const food = foods[randomIndex];
+    let count = 0;
+    let delay = 80;
 
-            if (food.image) {
-                document.getElementById("result").innerHTML =
-                    '<img src="' + food.image + '" class="food-image">' + 
-                    '<div class="food-name">' + food.name + '</div>';
-            } else {
-                document.getElementById("result").textContent = 
-                    food.emoji + " " + food.name;
-            }
+    function showRandomFood() {
+
+        const randomIndex = Math.floor(Math.random() * foods.length);
+        const food = foods[randomIndex];
+
+        document.getElementById("result").innerHTML =
+            '<img src="' + food.image + '" class="food-image">';
+
+        count++;
+
+        if (count < 15) {
+
+            delay = delay + 25;
+
+            setTimeout(showRandomFood, delay);
+
+        } else {
+
+            document.getElementById("result").innerHTML =
+                '<img src="' + food.image + '" class="food-image">' +
+                '<div class="food-name">' + food.name + '</div>';
         }
+    }
+
+    showRandomFood();
+}
 
     </script>
 
