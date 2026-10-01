@@ -145,7 +145,7 @@
         image: "ONIGIRIPLANET.jpg"
     }
         ];
-        function chooseFood() {
+function chooseFood() {
 
     let count = 0;
     let delay = 40;
@@ -162,7 +162,7 @@
 
         if (count < 15) {
 
-            delay = delay + 35;
+            delay = delay + 10 + (count * 5);
 
             setTimeout(showRandomFood, delay);
 
