@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>吃什麼？吃什麼？吃什麼？</title>
+    <title>要吃什麼咧？</title>
 
     <style>
         body {
@@ -26,12 +26,23 @@
         }
 
         button {
-            font-size: 20px;
-            padding: 15px 30px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             border: none;
-            border-radius: 12px;
+            background: #e53935;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
             cursor: pointer;
+        
+            box-shadow: 0 8px 0 #b71c1c;
         }
+
+button:active {
+    transform: translateY(8px);
+    box-shadow: 0 0 0 #b71c1c;
+}
         .food-image {
             width: 180px;
             height: 180px;
@@ -73,7 +84,7 @@
 
 <body>
 
-    <h1>吃什麼？吃什麼？吃什麼？</h1>
+    <h1>要吃什麼咧？</h1>
 
     <p>不知道吃什麼嗎？</p>
 
@@ -196,11 +207,11 @@ function chooseFood() {
 
         } else {
 
-    document.getElementById("result").innerHTML =
-        '<div class="fireworks">✦ ✧ ✦</div>' +
-        '<img src="' + food.image + '" class="food-image">' +
-        '<div class="food-name">' + food.name + '</div>' +
-        '<div class="fireworks">✧ ✦ ✧</div>';
+            document.getElementById("result").innerHTML =
+                '<div class="fireworks">✦ ✧ ✦</div>' +
+                '<img src="' + food.image + '" class="food-image">' +
+                '<div class="food-name">' + food.name + '</div>' +
+                '<div class="fireworks">✧ ✦ ✧</div>';
         }
     }
 
