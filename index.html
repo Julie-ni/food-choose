@@ -54,154 +54,139 @@ button:active {
 .fireworks {
     position: relative;
     width: 100%;
-    height: 130px;
-    margin-top: 5px;
+    height: 150px;
+    margin-top: 10px;
     pointer-events: none;
+    overflow: visible;
 }
 
 .firework {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    left: 50%;
-    top: 55px;
+    top: 50px;
+    width: 8px;
+    height: 8px;
+    z-index: 10;
 }
 
 .firework.left {
-    transform: translateX(-95px);
+    left: 22%;
 }
 
 .firework.right {
-    transform: translateX(95px);
+    right: 22%;
 }
 
 .spark {
     position: absolute;
     left: 0;
     top: 0;
-    width: 5px;
-    height: 5px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: #ffd60a;
-    transform-origin: 0 0;
-    animation: firework 1.1s ease-out forwards;
+    box-shadow:
+        0 0 6px #ffd60a,
+        0 0 12px #ffd60a;
+    animation: firework 1.5s ease-out forwards;
 }
-.left .spark:nth-child(1) {
+
+.firework.left .spark:nth-child(1) {
     --angle: -90deg;
-    --distance: 55px;
-}
-
-.left .spark:nth-child(2) {
-    --angle: -67deg;
-    --distance: 62px;
-}
-
-.left .spark:nth-child(3) {
-    --angle: -45deg;
-    --distance: 55px;
-}
-
-.left .spark:nth-child(4) {
-    --angle: -23deg;
     --distance: 65px;
 }
 
-.left .spark:nth-child(5) {
-    --angle: 0deg;
-    --distance: 58px;
-}
-
-.left .spark:nth-child(6) {
-    --angle: 23deg;
-    --distance: 52px;
-}
-
-.left .spark:nth-child(7) {
-    --angle: 45deg;
+.firework.left .spark:nth-child(2) {
+    --angle: -65deg;
     --distance: 60px;
 }
 
-.left .spark:nth-child(8) {
-    --angle: 67deg;
-    --distance: 52px;
+.firework.left .spark:nth-child(3) {
+    --angle: -40deg;
+    --distance: 70px;
 }
 
-.left .spark:nth-child(9) {
-    --angle: 90deg;
-    --distance: 58px;
-}
-
-.right .spark:nth-child(1) {
-    --angle: -90deg;
-    --distance: 58px;
-}
-
-.right .spark:nth-child(2) {
-    --angle: -67deg;
-    --distance: 52px;
-}
-
-.right .spark:nth-child(3) {
-    --angle: -45deg;
+.firework.left .spark:nth-child(4) {
+    --angle: -15deg;
     --distance: 62px;
 }
 
-.right .spark:nth-child(4) {
-    --angle: -23deg;
-    --distance: 55px;
-}
-
-.right .spark:nth-child(5) {
-    --angle: 0deg;
+.firework.left .spark:nth-child(5) {
+    --angle: 15deg;
     --distance: 65px;
 }
 
-.right .spark:nth-child(6) {
-    --angle: 23deg;
-    --distance: 58px;
+.firework.left .spark:nth-child(6) {
+    --angle: 40deg;
+    --distance: 70px;
 }
 
-.right .spark:nth-child(7) {
-    --angle: 45deg;
-    --distance: 52px;
+.firework.left .spark:nth-child(7) {
+    --angle: 65deg;
+    --distance: 60px;
 }
 
-.right .spark:nth-child(8) {
-    --angle: 67deg;
+.firework.left .spark:nth-child(8) {
+    --angle: 90deg;
+    --distance: 65px;
+}
+
+.firework.right .spark:nth-child(1) {
+    --angle: -90deg;
+    --distance: 65px;
+}
+
+.firework.right .spark:nth-child(2) {
+    --angle: -65deg;
+    --distance: 60px;
+}
+
+.firework.right .spark:nth-child(3) {
+    --angle: -40deg;
+    --distance: 70px;
+}
+
+.firework.right .spark:nth-child(4) {
+    --angle: -15deg;
     --distance: 62px;
 }
 
-.right .spark:nth-child(9) {
+.firework.right .spark:nth-child(5) {
+    --angle: 15deg;
+    --distance: 65px;
+}
+
+.firework.right .spark:nth-child(6) {
+    --angle: 40deg;
+    --distance: 70px;
+}
+
+.firework.right .spark:nth-child(7) {
+    --angle: 65deg;
+    --distance: 60px;
+}
+
+.firework.right .spark:nth-child(8) {
     --angle: 90deg;
-    --distance: 55px;
+    --distance: 65px;
 }
 
 @keyframes firework {
+
     0% {
-        opacity: 0;
-        transform:
-            rotate(var(--angle))
-            translateX(0)
-            scale(0.2);
-    }
-
-    15% {
         opacity: 1;
+        transform: rotate(var(--angle)) translateX(0) scale(1);
     }
 
-    70% {
+    30% {
         opacity: 1;
     }
 
     100% {
         opacity: 0;
-        transform:
-            rotate(var(--angle))
-            translateX(var(--distance))
-            scale(0.05);
+        transform: rotate(var(--angle)) translateX(var(--distance)) scale(0.2);
     }
 }
+
     </style>
 </head>
 
@@ -335,12 +320,13 @@ function chooseFood() {
         } else {
 
             setTimeout(function() {
-            document.querySelector("button").style.visibility = "visible"; }, 1100);
+            document.querySelector("button").style.visibility = "visible"; }, 1500);
 
             document.getElementById("result").innerHTML =
                 '<img src="' + food.image + '" class="food-image">' +
                 '<div class="food-name">' + food.name + '</div>' +
-                '<div class="fireworks">' + '<div class="firework left">' +
+                '<div class="fireworks">' +
+                '<div class="firework left">' +
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
@@ -349,7 +335,7 @@ function chooseFood() {
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
-                '<span class="spark"></span>' + '</div>' +
+                '</div>' +               
                 '<div class="firework right">' +
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
@@ -359,7 +345,7 @@ function chooseFood() {
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
                 '<span class="spark"></span>' +
-                '<span class="spark"></span>' + '</div>' + '</div>';
+                '</div>' + '</div>';
         }
     }
 
