@@ -81,81 +81,100 @@
         
         .firework {
             position: absolute;
-            top: 55px;
+            top: 45px;
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            animation: firework 1.5s ease-out forwards;
         }
-
+        
         .firework.left {
             left: 22%;
-            background: #ff3b30;
-            box-shadow:
-                0 -55px 0 #ffd60a,
-                20px -50px 0 #ff9500,
-                38px -35px 0 #ff2d55,
-                52px -15px 0 #af52de,
-                55px 5px 0 #5ac8fa,
-                48px 25px 0 #00d4ff,
-                30px 42px 0 #34c759,
-                5px 52px 0 #ffd60a,
-                -20px 48px 0 #ff9500,
-                -40px 32px 0 #ff3b30,
-                -52px 10px 0 #ff2d55,
-                -50px -15px 0 #af52de,
-                -35px -38px 0 #5ac8fa,
-                -15px -52px 0 #00d4ff;
         }
-
+        
         .firework.right {
             right: 22%;
-            background: #00d4ff;
-            box-shadow:
-                0 -55px 0 #ff2d55,
-                20px -50px 0 #af52de,
-                38px -35px 0 #5ac8fa,
-                52px -15px 0 #34c759,
-                55px 5px 0 #ffd60a,
-                48px 25px 0 #ff9500,
-                30px 42px 0 #ff3b30,
-                5px 52px 0 #ff2d55,
-                -20px 48px 0 #af52de,
-                -40px 32px 0 #5ac8fa,
-                -52px 10px 0 #34c759,
-                -50px -15px 0 #ffd60a,
-                -35px -38px 0 #ff9500,
-                -15px -52px 0 #ff3b30;
         }
 
-        @keyframes firework {
+        .firework::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            left: -1px;
+            top: -1px;
+            border-radius: 50%;
+            background: white;
+            box-shadow:
+                0 0 5px white,
+                0 0 12px rgba(255, 255, 255, 0.9);
+        }
+        
+        .spark {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 3px;
+            height: 16px;
+            border-radius: 50%;
+        
+            transform-origin: 50% 100%;
+        
+            opacity: 0;
+        
+            animation:
+                spark-fly 1.5s ease-out forwards;
+        }
+
+        @keyframes spark-fly {
         
             0% {
-                transform: scale(0.1);
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(0)
+                    scaleY(0.2);
+        
                 opacity: 0;
             }
         
-            15% {
-                transform: scale(0.7);
+            8% {
                 opacity: 1;
             }
         
-            45% {
-                transform: scale(1.15);
+            25% {
                 opacity: 1;
             }
         
-            65% {
-                transform: scale(1.15);
+            60% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(var(--distance))
+                    scaleY(1);
+        
                 opacity: 0.9;
             }
         
+            78% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) + 10px))
+                    scaleY(0.7);
+        
+                opacity: 0.55;
+            }
+        
             100% {
-                transform: scale(1.15);
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) + 22px))
+                    scaleY(0.35);
+        
                 opacity: 0;
             }
         }
-
     </style>    
 </head>
 
@@ -297,11 +316,48 @@ const delays = [
                 '<img src="' + food.image + '" class="food-image">' +
                 '<div class="food-name">' + food.name + '</div>' +
                 '<div class="fireworks">' +
-                '<div class="firework left"></div>' +
-                '<div class="firework right"></div>' +
+                
+                '<div class="firework left">' +
+                '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
+                '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
+                '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
+                '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
+                '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
+                '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
+                '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
+                '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
+                '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
+                '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
+                '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
+                '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
+                '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
+                '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
+                '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
+                '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
+                '</div>' +
+                
+                '<div class="firework right">' +
+                '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
+                '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
+                '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
+                '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
+                '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
+                '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
+                '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
+                '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
+                '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
+                '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
+                '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
+                '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
+                '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
+                '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
+                '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
+                '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
+                '</div>' +
+                
                 '</div>';
-        }
-    }
+                        }
+                    }
 
     showRandomFood();
 }
