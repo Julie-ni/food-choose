@@ -9,11 +9,15 @@
 
     <style>
         body {
+            position: relative;
+            min-height: 100vh;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 40px 20px;
             font-family: sans-serif;
             text-align: center;
-            padding: 40px 20px;
+            background: #fff8ef;
         }
-
         h1 {
             font-size: 40px;
         }
@@ -60,12 +64,14 @@
         button:active {
             transform: translateY(8px);
             box-shadow: 0 0 0 #b71c1c;
-            }
+        }
+        
         .food-image {
             width: 180px;
             height: 180px;
             object-fit: contain;
         }
+        
         .food-name {
             margin-top: 10px;
         }
@@ -175,16 +181,81 @@
                 opacity: 0;
             }
         }
-    </style>    
+        
+    #food-wall {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-auto-rows: 100px;
+        gap: 12px;
+        padding: 12px;
+        overflow: hidden;
+        pointer-events: none;
+    }
+        
+    .wall-food {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0.22;
+        filter: saturate(1.15);
+    }
+        
+    .wall-food:nth-child(3n) {
+        transform: rotate(-10deg) scale(0.9);
+    }
+    
+    .wall-food:nth-child(3n + 1) {
+        transform: rotate(8deg) scale(0.95);
+    }
+    
+    .wall-food:nth-child(3n + 2) {
+        transform: rotate(-4deg) scale(0.85);
+    }
+        
+    .main-card {
+        position: relative;
+        z-index: 1;
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 24px 16px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 8px 30px rgba(120, 75, 35, 0.12);
+        box-sizing: border-box;
+    }
+        
+        @media (max-width: 600px) {
+    #food-wall {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: 85px;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .main-card {
+        padding: 20px 10px;
+        border-radius: 24px;
+    }
+}
+
+</style>    
 </head>
 
 <body>
 
-    <h1>要吃什麼咧？</h1>
+    <div id="food-wall" aria-hidden="true"></div>
 
-    <div id="result">手黑黑還是白白！？</div>
+    <main class="main-card">
+        <h1>要吃什麼咧？</h1>
 
-    <button onclick="chooseFood()">START !</button>
+        <div id="result">手黑黑還是白白！？</div>
+
+        <button onclick="chooseFood()">START !</button>
+
+    </main>
 
     <script>
 
@@ -277,16 +348,31 @@
         name: "飯糰",
         image: "ONIGIRIPLANET.jpg"
     }
-        ];
+];
 
-    foods.forEach(function(food) { const img = new Image(); img.src = food.image;
+    foods.forEach(function(food) {
+       const img = new Image();
+       img.src = food.image;
 });
 
-function chooseFood() {
+const foodWall = document.getElementById("food-wall");
 
+for (let i = 0; i < 60; i++) {
+    const food = foods[i % foods.length];
+
+    const img = document.createElement("img");
+    img.src = food.image;
+    img.alt = "";
+    img.className = "wall-food";
+    img.loading = "eager";
+
+    foodWall.appendChild(img);
+}
+
+function chooseFood() {
     document.querySelector("button").style.visibility = "hidden";
 
-let count = 0;
+    let count = 0;
 
 const delays = [
     40, 45, 50, 55, 60,
@@ -304,9 +390,7 @@ const delays = [
         count++;
 
         if (count < 15) {
-        
             setTimeout(showRandomFood, delays[count -1]);
-        
         } else {
 
             setTimeout(function() {
