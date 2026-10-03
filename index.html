@@ -29,7 +29,7 @@
             min-height: 410px;
         }
 
-        button {
+        #start-button {
             position: relative;
             top: -100px;
             width: 100px;
@@ -43,9 +43,10 @@
             cursor: pointer;
             box-shadow: 0 8px 0 #b71c1c;
             overflow: hidden;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
         }
 
-        button::before {
+        #start-button::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -58,11 +59,7 @@
             pointer-events: none;
         }
 
-        button {
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-        }
-
-        button:active {
+        #start-button:active {
             transform: translateY(8px);
             box-shadow: 0 0 0 #b71c1c;
         }
@@ -183,22 +180,22 @@
             }
         }
         
-    #food-wall {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 0;
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        grid-auto-rows: 100px;
-        gap: 12px;
-        padding: 12px;
-        overflow: hidden;
-        pointer-events: none;
-        box-sizing: border-box;
-    }
+        #food-wall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-auto-rows: 100px;
+            gap: 12px;
+            padding: 12px;
+            overflow: hidden;
+            pointer-events: none;
+            box-sizing: border-box;
+        }
         
     .wall-food {
         width: 100%;
@@ -227,18 +224,99 @@
         margin: 0 auto;
         padding: 24px 16px;
         border-radius: 28px;
-        background: rgba(255, 255, 255, 0.88);
+        background: rgba(255, 255, 255, 0.72);
         box-shadow: 0 8px 30px rgba(120, 75, 35, 0.12);
         box-sizing: border-box;
     }
+
+    #list-button {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 10;
+        width: 64px;
+        height: 42px;
+        border-radius: 21px;
+        border: none;
+        background: rgba(255, 255, 255, 0.88);
+        color: #555;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+    }
+
+    #food-list {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.35);
+        box-sizing: border-box;
+    }
+    
+    .food-list-hidden {
+        display: none !important;
+    }
+
+    .food-list-box {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 28px 20px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+    }
+    
+    .food-list-box h2 {
+        margin: 0 0 20px;
+        font-size: 28px;
+    }
+
+    #list-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 50%;
+        background: #eee;
+        color: #555;
+        font-size: 26px;
+        line-height: 36px;
+        box-shadow: none;
+    }
+    
+    #food-list-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .food-list-item {
+        padding: 10px;
+        border-radius: 12px;
+        background: #fff8ef;
+        text-align: left;
+        font-size: 16px;
+        font-weight: bold;
+    }
         
         @media (max-width: 600px) {
-    #food-wall {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-auto-rows: 85px;
-        gap: 8px;
-        padding: 8px;
-    }
+            #food-wall {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                grid-auto-rows: 85px;
+                gap: 8px;
+                padding: 8px;
+            }
 
     .main-card {
         padding: 20px 10px;
@@ -253,14 +331,24 @@
 
     <div id="food-wall" aria-hidden="true"></div>
 
+    <button id="list-button" onclick="toggleFoodList()">LIST</button>
+
     <main class="main-card">
         <h1>要吃什麼咧？</h1>
 
         <div id="result">手黑黑還是白白！？</div>
 
-        <button onclick="chooseFood()">START !</button>
+        <button id="start-button" onclick="chooseFood()">START !</button>
 
     </main>
+
+    <div id="food-list" class="food-list-hidden">
+        <div class="food-list-box">
+            <button id="list-close" onclick="toggleFoodList()">×</button>
+            <h2>餐點清單</h2>
+            <div id="food-list-items"></div>
+        </div>
+    </div>
 
     <script>
 
@@ -362,6 +450,23 @@
 
 const foodWall = document.getElementById("food-wall");
 
+const foodListItems = document.getElementById("food-list-items");
+
+foods.forEach(function(food) {
+    const item = document.createElement("div");
+
+    item.className = "food-list-item";
+    item.textContent = food.name;
+
+    foodListItems.appendChild(item);
+});
+
+function toggleFoodList() {
+    const foodList = document.getElementById("food-list");
+
+    foodList.classList.toggle("food-list-hidden");
+}
+
 for (let i = 0; i < 60; i++) {
     const food = foods[i % foods.length];
 
@@ -375,15 +480,15 @@ for (let i = 0; i < 60; i++) {
 }
 
 function chooseFood() {
-    document.querySelector("button").style.visibility = "hidden";
+    document.getElementById("start-button").style.visibility = "hidden";
 
     let count = 0;
-
-const delays = [
-    40, 45, 50, 55, 60,
-    70, 80, 95, 115, 140,
-    170, 205, 245, 290, 340
-];
+    
+    const delays = [
+        40, 45, 50, 55, 60,
+        70, 80, 95, 115, 140,
+        170, 205, 245, 290, 340
+    ];
     function showRandomFood() {
 
         const randomIndex = Math.floor(Math.random() * foods.length);
@@ -395,11 +500,12 @@ const delays = [
         count++;
 
         if (count < 15) {
-            setTimeout(showRandomFood, delays[count -1]);
+            setTimeout(showRandomFood, delays[count - 1]);
         } else {
 
             setTimeout(function() {
-            document.querySelector("button").style.visibility = "visible"; }, 1500);
+                document.getElementById("start-button").style.visibility = "visible";
+            }, 1500);
 
             document.getElementById("result").innerHTML =
                 '<img src="' + food.image + '" class="food-image">' +
