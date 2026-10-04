@@ -30,9 +30,10 @@
         }
 
         #start-button {
-            position: relative;
-            top: -100px;
-            margin-bottom: -100px;
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
             width: 100px;
             height: 100px;
             border-radius: 50%;
@@ -61,7 +62,7 @@
         }
 
         #start-button:active {
-            transform: translateY(8px);
+            transform: translateX(-50%) translateY(8px);
             box-shadow: 0 0 0 #b71c1c;
         }
         
@@ -80,6 +81,7 @@
             font-size: 36px;
             font-weight: bold;
             color: #e53935;
+            visibility: hidden;
         }
 
         .food-name-placeholder {
@@ -213,133 +215,133 @@
             box-sizing: border-box;
         }
         
-    .wall-food {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        opacity: 0.22;
-        filter: saturate(1.15);
-    }
+        .wall-food {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.22;
+            filter: saturate(1.15);
+        }
+            
+        .wall-food:nth-child(3n) {
+            transform: rotate(-10deg) scale(0.9);
+        }
         
-    .wall-food:nth-child(3n) {
-        transform: rotate(-10deg) scale(0.9);
-    }
-    
-    .wall-food:nth-child(3n + 1) {
-        transform: rotate(8deg) scale(0.95);
-    }
-    
-    .wall-food:nth-child(3n + 2) {
-        transform: rotate(-4deg) scale(0.85);
-    }
+        .wall-food:nth-child(3n + 1) {
+            transform: rotate(8deg) scale(0.95);
+        }
         
-    .main-card {
-        position: relative;
-        z-index: 1;
-        max-width: 460px;
-        height: calc(100vh - 120px);
-        margin: 0 auto;
-        padding: 20px 14px 120px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.55);
-        box-shadow: 0 8px 24px rgba(120, 75, 35, 0.08);
-        box-sizing: border-box;
-    }
-
-    #list-button {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 10;
-        width: 64px;
-        height: 42px;
-        border-radius: 21px;
-        border: none;
-        background: rgba(255, 255, 255, 0.88);
-        color: #555;
-        font-size: 14px;
-        font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        cursor: pointer;
-    }
-
-    #food-list {
-        position: fixed;
-        inset: 0;
-        z-index: 20;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        background: rgba(0, 0, 0, 0.35);
-        box-sizing: border-box;
-    }
-    
-    .food-list-hidden {
-        display: none !important;
-    }
-
-    .food-list-box {
-        position: relative;
-        width: 100%;
-        max-width: 420px;
-        max-height: 80vh;
-        overflow-y: auto;
-        padding: 28px 20px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        box-sizing: border-box;
-    }
-    
-    .food-list-box h2 {
-        margin: 0 0 20px;
-        font-size: 28px;
-    }
-
-    #list-close {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        width: 36px;
-        height: 36px;
-        padding: 0;
-        border-radius: 50%;
-        background: #eee;
-        color: #555;
-        font-size: 26px;
-        line-height: 36px;
-        box-shadow: none;
-    }
-    
-    #food-list-items {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    .food-list-item {
-        padding: 10px;
-        border-radius: 12px;
-        background: #fff8ef;
-        text-align: left;
-        font-size: 16px;
-        font-weight: bold;
-    }
+        .wall-food:nth-child(3n + 2) {
+            transform: rotate(-4deg) scale(0.85);
+        }
         
-        @media (max-width: 600px) {
-            #food-wall {
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-                grid-auto-rows: 85px;
-                gap: 8px;
-                padding: 8px;
-            }
+        .main-card {
+            position: relative;
+            z-index: 1;
+            max-width: 460px;
+            height: calc(100vh - 120px);
+            margin: 0 auto;
+            padding: 20px 14px 120px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 8px 24px rgba(120, 75, 35, 0.08);
+            box-sizing: border-box;
+        }
+    
+        #list-button {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 10;
+            width: 64px;
+            height: 42px;
+            border-radius: 21px;
+            border: none;
+            background: rgba(255, 255, 255, 0.88);
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
 
-    .main-card {
-        padding: 20px 10px;
-        border-radius: 24px;
+        #food-list {
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.35);
+            box-sizing: border-box;
+        }
+        
+        .food-list-hidden {
+            display: none !important;
+        }
+
+        .food-list-box {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 28px 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+        
+        .food-list-box h2 {
+            margin: 0 0 20px;
+            font-size: 28px;
+        }
+
+        #list-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 50%;
+            background: #eee;
+            color: #555;
+            font-size: 26px;
+            line-height: 36px;
+            box-shadow: none;
+        }
+        
+        #food-list-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .food-list-item {
+            padding: 10px;
+            border-radius: 12px;
+            background: #fff8ef;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+            
+            @media (max-width: 600px) {
+                #food-wall {
+                    grid-template-columns: repeat(4, minmax(0, 1fr));
+                    grid-auto-rows: 85px;
+                    gap: 8px;
+                    padding: 8px;
+                }
+    
+        .main-card {
+            padding: 20px 10px;
+            border-radius: 24px;
+        }
     }
-}
 
 </style>    
 </head>
@@ -524,55 +526,56 @@ function chooseFood() {
 
             setTimeout(function() {
                 document.getElementById("start-button").style.visibility = "visible";
+                document.querySelector(".restart-text").style.visibility = "visible";
             }, 1500);
 
-            document.getElementById("result").innerHTML =
-                '<img src="' + food.image + '" class="food-image">' +
-                '<div class="food-name">' + food.name + '</div>' +
-                '<div class="restart-text">再重來一次！？</div>' +
-                '<div class="fireworks">' +
+                document.getElementById("result").innerHTML =
+                    '<img src="' + food.image + '" class="food-image">' +
+                    '<div class="food-name">' + food.name + '</div>' +
+                    '<div class="restart-text">再重來一次！？</div>' +
+                    '<div class="fireworks">' +
                 
-                '<div class="firework left">' +
-                '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
-                '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
-                '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
-                '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
-                '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
-                '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
-                '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
-                '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
-                '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
-                '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
-                '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
-                '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
-                '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
-                '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
-                '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
-                '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
-                '</div>' +
+                    '<div class="firework left">' +
+                    '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
+                    '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
+                    '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
+                    '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
+                    '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
+                    '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
+                    '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
+                    '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
+                    '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
+                    '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
+                    '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
+                    '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
+                    '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
+                    '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
+                    '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
+                    '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
+                    '</div>' +
                 
-                '<div class="firework right">' +
-                '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
-                '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
-                '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
-                '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
-                '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
-                '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
-                '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
-                '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
-                '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
-                '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
-                '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
-                '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
-                '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
-                '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
-                '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
-                '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
-                '</div>' +
-                
-                '</div>';
+                    '<div class="firework right">' +
+                    '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
+                    '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
+                    '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
+                    '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
+                    '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
+                    '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
+                    '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
+                    '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
+                    '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
+                    '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
+                    '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
+                    '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
+                    '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
+                    '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
+                    '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
+                    '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
+                    '</div>' +
+                    
+                    '</div>';
+                            }
                         }
-                    }
 
     showRandomFood();
 }
