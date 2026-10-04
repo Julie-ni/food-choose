@@ -504,26 +504,27 @@
 
         function chooseFood() {
             document.getElementById("start-button").style.visibility = "hidden";
-    
+
             let count = 0;
-            
+
             const delays = [
                 40, 45, 50, 55, 60,
                 70, 80, 95, 115, 140,
                 170, 205, 245, 290, 340
             ];
+
             function showRandomFood() {
 
                 const randomIndex = Math.floor(Math.random() * foods.length);
                 const food = foods[randomIndex];
-    
+
                 document.getElementById("result").innerHTML =
                     '<img src="' + food.image + '" class="food-image">' +
                     '<div class="food-name-placeholder"></div>' +
                     '<div class="fireworks-placeholder"></div>';
-    
+
                 count++;
-    
+
                 if (count < 15) {
                     setTimeout(showRandomFood, delays[count - 1]);
                 } else {
@@ -533,7 +534,7 @@
                         '<div class="food-name">' + food.name + '</div>' +
                         '<div class="restart-text">再重來一次 !?</div>' +
                         '<div class="fireworks">' +
-                        
+
                         '<div class="firework left">' +
                         '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
                         '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
@@ -552,7 +553,7 @@
                         '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
                         '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
                         '</div>' +
-                    
+
                         '<div class="firework right">' +
                         '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
                         '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
@@ -571,13 +572,14 @@
                         '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
                         '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
                         '</div>' +
-                        
+
                         '</div>';
 
-                setTimeout(function() {
-                    document.getElementById("start-button").style.visibility = "visible";
-                    document.querySelector(".restart-text").style.visibility = "visible";
-                }, 1500);
+                    setTimeout(function() {
+                        document.getElementById("start-button").style.visibility = "visible";
+                        document.querySelector(".restart-text").style.visibility = "visible";
+                    }, 1500);
+                }
             }
 
             showRandomFood();
