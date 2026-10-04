@@ -120,41 +120,39 @@
         .firework::before {
             content: "";
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             left: -1px;
             top: -1px;
             border-radius: 50%;
-            background: white;
+            background: #fff;
             box-shadow:
-                0 0 5px white,
-                0 0 12px rgba(255, 255, 255, 0.9);
+                0 0 4px #fff,
+                0 0 10px rgba(255, 255, 255, 0.95),
+                0 0 20px rgba(255, 220, 120, 0.7);
         }
         
         .spark {
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 3px;
-            height: 16px;
+            width: 2px;
+            height: 24px;
             border-radius: 50%;
-        
             transform-origin: 50% 100%;
-        
             opacity: 0;
-        
-            animation:
-                spark-fly 1.5s ease-out forwards;
+            filter: blur(0.2px);
+            animation: realistic-firework 1.5s ease-out forwards;
         }
 
-        @keyframes spark-fly {
-        
+        @keyframes realistic-firework {
+            
             0% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(0)
-                    scaleY(0.2);
+                    scaleY(0.15);
         
                 opacity: 0;
             }
@@ -163,36 +161,42 @@
                 opacity: 1;
             }
         
-            25% {
+            18% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) * 0.35))
+                    scaleY(1);
+        
                 opacity: 1;
             }
-        
-            60% {
+            
+            48% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(var(--distance))
-                    scaleY(1);
+                    scaleY(0.9);
         
-                opacity: 0.9;
+                opacity: 0.95;
             }
-        
-            78% {
+
+            72% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 10px))
-                    scaleY(0.7);
-        
+                    translateY(calc(var(--distance) + 12px))
+                    scaleY(0.65);
+    
                 opacity: 0.55;
             }
-        
+            
             100% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 22px))
-                    scaleY(0.35);
+                    translateY(calc(var(--distance) + 25px))
+                    scaleY(0.25);
         
                 opacity: 0;
             }
@@ -329,19 +333,19 @@
             font-weight: bold;
         }
             
-            @media (max-width: 600px) {
-                #food-wall {
-                    grid-template-columns: repeat(4, minmax(0, 1fr));
-                    grid-auto-rows: 85px;
-                    gap: 8px;
-                    padding: 8px;
-                }
+        @media (max-width: 600px) {
+            #food-wall {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                grid-auto-rows: 85px;
+                gap: 8px;
+                padding: 8px;
+            }
     
-        .main-card {
-            padding: 20px 10px;
-            border-radius: 24px;
+            .main-card {
+                padding: 20px 10px;
+                border-radius: 24px;
+            }
         }
-    }
 
 </style>    
 </head>
@@ -372,213 +376,213 @@
     <script>
 
        const foods = [
-    {
-        name: "麥當勞",
-        image: "MCDONALD.JPG"
-    },
-    {
-        name: "義大利麵",
-        image: "KIRINPASTA.JPG"
-    },
-    {
-        name: "摩斯",
-        image: "MOS.JPG"
-    },
-    {
-        name: "丼飯",
-        image: "SUKIYA.JPG"
-    },
-    {
-        name: "健康餐",
-        image: "GETPOWER.jpg"
-    },
-    {
-        name: "水餃 / 鍋貼",
-        image: "BAFANG.JPG"
-    },
-    {
-        name: "炸雞",
-        image: "21PLUS.JPG"
-    },
-    {
-        name: "漢堡王",
-        image: "BURGERKING.JPG"
-    },
-    {
-        name: "肯德基",
-        image: "KFC.JPG"
-    },
-    {
-        name: "關東煮 / 甜不辣",
-        image: "TWOFISH.JPG"
-    },
-    {
-        name: "鑫吉野烤肉飯",
-        image: "XINJIYE.JPG"
-    },
-    {
-        name: "雞肉本家",
-        image: "CHICKENBENJIA.JPG"
-    },
-    {
-        name: "粽子",
-        image: "ZHENPINJIURU.JPG"
-    },
-    {
-        name: "牛肉麵",
-        image: "579.JPG"
-    },
-    {
-        name: "小樂天",
-        image: "XIAOLETIAN.JPG"
-    },
-    {
-        name: "烤肉飯",
-        image: "KAOSHIFU.JPG"
-    },
-    {
-        name: "米糕",
-        image: "WEIJIA.JPG"
-    },
-    {
-        name: "咖哩飯",
-        image: "LANE30.JPG"
-    },
-    {
-        name: "豆漿",
-        image: "HONGJI.JPG"
-    },
-    {
-        name: "傻瓜麵",
-        image: "FOOL.JPG"
-    },
-    {
-        name: "雞肉飯",
-        image: "JIANHONG.JPG"
-    },
-    {
-        name: "飯糰",
-        image: "ONIGIRIPLANET.jpg"
-    }
-];
+            {
+                name: "麥當勞",
+                image: "MCDONALD.JPG"
+            },
+            {
+                name: "義大利麵",
+                image: "KIRINPASTA.JPG"
+            },
+            {
+                name: "摩斯",
+                image: "MOS.JPG"
+            },
+            {
+                name: "丼飯",
+                image: "SUKIYA.JPG"
+            },
+            {
+                name: "健康餐",
+                image: "GETPOWER.jpg"
+            },
+            {
+                name: "水餃 / 鍋貼",
+                image: "BAFANG.JPG"
+            },
+            {
+                name: "炸雞",
+                image: "21PLUS.JPG"
+            },
+            {
+                name: "漢堡王",
+                image: "BURGERKING.JPG"
+            },
+            {
+                name: "肯德基",
+                image: "KFC.JPG"
+            },
+            {
+                name: "關東煮 / 甜不辣",
+                image: "TWOFISH.JPG"
+            },
+            {
+                name: "鑫吉野烤肉飯",
+                image: "XINJIYE.JPG"
+            },
+            {
+                name: "雞肉本家",
+                image: "CHICKENBENJIA.JPG"
+            },
+            {
+                name: "粽子",
+                image: "ZHENPINJIURU.JPG"
+            },
+            {
+                name: "牛肉麵",
+                image: "579.JPG"
+            },
+            {
+                name: "小樂天",
+                image: "XIAOLETIAN.JPG"
+            },
+            {
+                name: "烤肉飯",
+                image: "KAOSHIFU.JPG"
+            },
+            {
+                name: "米糕",
+                image: "WEIJIA.JPG"
+            },
+            {
+                name: "咖哩飯",
+                image: "LANE30.JPG"
+            },
+            {
+                name: "豆漿",
+                image: "HONGJI.JPG"
+            },
+            {
+                name: "傻瓜麵",
+                image: "FOOL.JPG"
+            },
+            {
+                name: "雞肉飯",
+                image: "JIANHONG.JPG"
+            },
+            {
+                name: "飯糰",
+                image: "ONIGIRIPLANET.jpg"
+            }
+        ];
 
-    foods.forEach(function(food) {
-       const img = new Image();
-       img.src = food.image;
-});
+        foods.forEach(function(food) {
+            const img = new Image();
+            img.src = food.image;
+        });
 
-const foodWall = document.getElementById("food-wall");
+        const foodWall = document.getElementById("food-wall");
+        
+        const foodListItems = document.getElementById("food-list-items");
 
-const foodListItems = document.getElementById("food-list-items");
+        foods.forEach(function(food) {
+            const item = document.createElement("div");
+        
+            item.className = "food-list-item";
+            item.textContent = food.name;
+        
+            foodListItems.appendChild(item);
+        });
 
-foods.forEach(function(food) {
-    const item = document.createElement("div");
+        function toggleFoodList() {
+            const foodList = document.getElementById("food-list");
+        
+            foodList.classList.toggle("food-list-hidden");
+        }
 
-    item.className = "food-list-item";
-    item.textContent = food.name;
-
-    foodListItems.appendChild(item);
-});
-
-function toggleFoodList() {
-    const foodList = document.getElementById("food-list");
-
-    foodList.classList.toggle("food-list-hidden");
-}
-
-for (let i = 0; i < 60; i++) {
-    const food = foods[i % foods.length];
-
-    const img = document.createElement("img");
-    img.src = food.image;
-    img.alt = "";
-    img.className = "wall-food";
-    img.loading = "eager";
-
-    foodWall.appendChild(img);
-}
-
-function chooseFood() {
-    document.getElementById("start-button").style.visibility = "hidden";
-
-    let count = 0;
+        for (let i = 0; i < 60; i++) {
+            const food = foods[i % foods.length];
     
-    const delays = [
-        40, 45, 50, 55, 60,
-        70, 80, 95, 115, 140,
-        170, 205, 245, 290, 340
-    ];
-    function showRandomFood() {
+            const img = document.createElement("img");
+            img.src = food.image;
+            img.alt = "";
+            img.className = "wall-food";
+            img.loading = "eager";
+        
+            foodWall.appendChild(img);
+        }
 
-        const randomIndex = Math.floor(Math.random() * foods.length);
-        const food = foods[randomIndex];
+        function chooseFood() {
+            document.getElementById("start-button").style.visibility = "hidden";
+    
+            let count = 0;
+            
+            const delays = [
+                40, 45, 50, 55, 60,
+                70, 80, 95, 115, 140,
+                170, 205, 245, 290, 340
+            ];
+            function showRandomFood() {
 
-        document.getElementById("result").innerHTML =
-            '<img src="' + food.image + '" class="food-image">' +
-            '<div class="food-name-placeholder"></div>' +
-            '<div class="fireworks-placeholder"></div>';
-
-        count++;
-
-        if (count < 15) {
-            setTimeout(showRandomFood, delays[count - 1]);
-        } else {
-
+                const randomIndex = Math.floor(Math.random() * foods.length);
+                const food = foods[randomIndex];
+    
                 document.getElementById("result").innerHTML =
                     '<img src="' + food.image + '" class="food-image">' +
-                    '<div class="food-name">' + food.name + '</div>' +
-                    '<div class="restart-text">再重來一次 !?</div>' +
-                    '<div class="fireworks">' +
-                
-                    '<div class="firework left">' +
-                    '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
-                    '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
-                    '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
-                    '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
-                    '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
-                    '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
-                    '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
-                    '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
-                    '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
-                    '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
-                    '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
-                    '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
-                    '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
-                    '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
-                    '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
-                    '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
-                    '</div>' +
-                
-                    '<div class="firework right">' +
-                    '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
-                    '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
-                    '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
-                    '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
-                    '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
-                    '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
-                    '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
-                    '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
-                    '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
-                    '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
-                    '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
-                    '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
-                    '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
-                    '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
-                    '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
-                    '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
-                    '</div>' +
+                    '<div class="food-name-placeholder"></div>' +
+                    '<div class="fireworks-placeholder"></div>';
+    
+                count++;
+    
+                if (count < 15) {
+                    setTimeout(showRandomFood, delays[count - 1]);
+                } else {
+
+                    document.getElementById("result").innerHTML =
+                        '<img src="' + food.image + '" class="food-image">' +
+                        '<div class="food-name">' + food.name + '</div>' +
+                        '<div class="restart-text">再重來一次 !?</div>' +
+                        '<div class="fireworks">' +
+                        
+                        '<div class="firework left">' +
+                        '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
+                        '</div>' +
                     
-                    '</div>';
+                        '<div class="firework right">' +
+                        '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
+                        '</div>' +
+                        
+                        '</div>';
 
-            setTimeout(function() {
-                document.getElementById("start-button").style.visibility = "visible";
-                document.querySelector(".restart-text").style.visibility = "visible";
-            }, 1500);
-                            }
-                        }
+                setTimeout(function() {
+                    document.getElementById("start-button").style.visibility = "visible";
+                    document.querySelector(".restart-text").style.visibility = "visible";
+                }, 1500);
+            }
+        }
 
-    showRandomFood();
-}
+        showRandomFood();
+    }
 
     </script>
 
