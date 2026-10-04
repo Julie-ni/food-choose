@@ -32,7 +32,7 @@
         #start-button {
             position: absolute;
             left: 50%;
-            bottom: 20px;
+            bottom: 60px;
             transform: translateX(-50%);
             width: 100px;
             height: 100px;
@@ -524,15 +524,10 @@ function chooseFood() {
             setTimeout(showRandomFood, delays[count - 1]);
         } else {
 
-            setTimeout(function() {
-                document.getElementById("start-button").style.visibility = "visible";
-                document.querySelector(".restart-text").style.visibility = "visible";
-            }, 1500);
-
                 document.getElementById("result").innerHTML =
                     '<img src="' + food.image + '" class="food-image">' +
                     '<div class="food-name">' + food.name + '</div>' +
-                    '<div class="restart-text">再重來一次！？</div>' +
+                    '<div class="restart-text">再重來一次 !?</div>' +
                     '<div class="fireworks">' +
                 
                     '<div class="firework left">' +
@@ -574,6 +569,11 @@ function chooseFood() {
                     '</div>' +
                     
                     '</div>';
+
+            setTimeout(function() {
+                document.getElementById("start-button").style.visibility = "visible";
+                document.querySelector(".restart-text").style.visibility = "visible";
+            }, 1500);
                             }
                         }
 
