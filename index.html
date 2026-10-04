@@ -75,6 +75,13 @@
             margin-top: 10px;
         }
 
+        .restart-text {
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e53935;
+        }
+
         .food-name-placeholder {
             height: 38px;
         }
@@ -230,6 +237,7 @@
         position: relative;
         z-index: 1;
         max-width: 460px;
+        height: 720px;
         margin: 0 auto;
         padding: 20px 14px 120px;
         border-radius: 24px;
@@ -521,6 +529,7 @@ function chooseFood() {
             document.getElementById("result").innerHTML =
                 '<img src="' + food.image + '" class="food-image">' +
                 '<div class="food-name">' + food.name + '</div>' +
+                '<div class="restart-text">再重來一次！？</div>' +
                 '<div class="fireworks">' +
                 
                 '<div class="firework left">' +
