@@ -104,7 +104,7 @@
         .fireworks {
             position: relative;
             width: 72px;
-            height: 72px;
+            height: 120px;
             flex-shrink: 0;
             overflow: visible;
             pointer-events: none;
@@ -112,58 +112,140 @@
         
         .firework {
             position: absolute;
-            top: 50%;
-            width: 4px;
-            height: 4px;
+            left: 50%;
+            bottom: 0;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            transform: translateY(-50%);
+            transform: translateX(-50%);
         }
         
-        .firework.left {
-            right: 2px;
-        }
-        
-        .firework.right {
-            left: 2px;
+        .firework::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 5px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow:
+                0 0 5px #fff,
+                0 0 10px #ffd60a,
+                0 0 18px rgba(255, 180, 50, 0.9);
+            transform: translateX(-50%);
+            animation: firework-launch 0.75s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
         }
         
         .firework::before {
             content: "";
             position: absolute;
-            width: 5px;
-            height: 5px;
-            left: 0;
-            top: 0;
+            left: 50%;
+            bottom: -8px;
+            width: 3px;
+            height: 34px;
             border-radius: 50%;
-            background: #fff;
-            box-shadow:
-                0 0 4px #fff,
-                0 0 8px #fff,
-                0 0 15px rgba(255, 230, 150, 0.95);
-            z-index: 2;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.9),
+                rgba(255, 190, 50, 0.7),
+                rgba(255, 120, 20, 0)
+            );
+            transform: translateX(-50%);
+            filter: blur(1px);
+            animation: firework-trail 0.75s ease-out forwards;
+        }
+        
+        @keyframes firework-launch {
+            0% {
+                bottom: 0;
+                opacity: 0;
+                transform: translateX(-50%) scale(0.7);
+            }
+        
+            10% {
+                opacity: 1;
+            }
+        
+            75% {
+                bottom: 75px;
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        
+            100% {
+                bottom: 82px;
+                opacity: 1;
+                transform: translateX(-50%) scale(0.8);
+            }
+        }
+        
+        @keyframes firework-trail {
+            0% {
+                bottom: -8px;
+                height: 10px;
+                opacity: 0;
+            }
+        
+            15% {
+                opacity: 1;
+            }
+        
+            70% {
+                height: 42px;
+                opacity: 0.9;
+            }
+        
+            100% {
+                bottom: 68px;
+                height: 20px;
+                opacity: 0;
+            }
         }
         
         .spark {
             position: absolute;
             left: 50%;
-            top: 50%;
-            width: 2px;
+            bottom: 82px;
+            width: 3px;
             height: var(--spark-height);
             border-radius: 100% 100% 40% 40%;
             transform-origin: 50% 0%;
             opacity: 0;
             filter: blur(0.2px);
+        
             box-shadow:
                 0 0 3px currentColor,
-                0 0 6px currentColor;
-            animation: realistic-firework 1.5s cubic-bezier(0.12, 0.65, 0.25, 1) forwards;
+                0 0 7px currentColor;
+        
+            animation:
+                firework-explosion 1.35s cubic-bezier(0.12, 0.65, 0.25, 1)
+                0.82s forwards;
         }
         
-        @keyframes realistic-firework {
+        .firework .explosion-core {
+            position: absolute;
+            left: 50%;
+            bottom: 82px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+            transform: translate(-50%, 50%) scale(0);
+            box-shadow:
+                0 0 5px #fff,
+                0 0 12px #fff,
+                0 0 22px rgba(255, 230, 150, 0.95);
         
+            animation:
+                explosion-core 0.45s ease-out
+                0.82s forwards;
+        }
+        
+        @keyframes firework-explosion {
             0% {
                 transform:
-                    translate(-50%, -50%)
+                    translate(-50%, 50%)
                     rotate(var(--angle))
                     translateY(0)
                     scaleY(0.05);
@@ -171,58 +253,70 @@
                 opacity: 0;
             }
         
-            5% {
+            8% {
                 opacity: 1;
-                transform:
-                    translate(-50%, -50%)
-                    rotate(var(--angle))
-                    translateY(calc(var(--distance) * 0.08))
-                    scaleY(1);
             }
         
-            25% {
+            35% {
                 opacity: 1;
-                transform:
-                    translate(-50%, -50%)
-                    rotate(var(--angle))
-                    translateY(calc(var(--distance) * 0.72))
-                    scaleY(1);
-            }
         
-            45% {
-                opacity: 0.95;
                 transform:
-                    translate(-50%, -50%)
+                    translate(-50%, 50%)
                     rotate(var(--angle))
                     translateY(var(--distance))
-                    scaleY(0.85);
+                    scaleY(1);
             }
         
-            65% {
-                opacity: 0.65;
+            58% {
+                opacity: 0.85;
+        
                 transform:
-                    translate(-50%, -50%)
+                    translate(-50%, 50%)
                     rotate(var(--angle))
                     translateY(calc(var(--distance) + 8px))
-                    scaleY(0.65);
+                    scaleY(0.8);
             }
         
-            82% {
-                opacity: 0.32;
+            78% {
+                opacity: 0.45;
+        
                 transform:
-                    translate(-50%, -50%)
+                    translate(-50%, 50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 18px))
-                    scaleY(0.42);
+                    translateY(calc(var(--distance) + 20px))
+                    scaleY(0.55);
             }
         
             100% {
                 opacity: 0;
+        
                 transform:
-                    translate(-50%, -50%)
+                    translate(-50%, 50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 30px))
-                    scaleY(0.15);
+                    translateY(calc(var(--distance) + 34px))
+                    scaleY(0.2);
+            }
+        }
+        
+        @keyframes explosion-core {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 50%) scale(0);
+            }
+        
+            20% {
+                opacity: 1;
+                transform: translate(-50%, 50%) scale(1.8);
+            }
+        
+            55% {
+                opacity: 0.8;
+                transform: translate(-50%, 50%) scale(1);
+            }
+        
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 50%) scale(0.2);
             }
         }
         
@@ -564,6 +658,7 @@
                     
                             '<div class="fireworks">' +
                                 '<div class="firework left">' +
+                                    '<div class="explosion-core"></div>' +
                                     '<span class="spark" style="--angle:0deg;--distance:28px;--spark-height:13px;background:#ffd60a;color:#ffd60a"></span>' +
                                     '<span class="spark" style="--angle:30deg;--distance:27px;--spark-height:16px;background:#ff9500;color:#ff9500"></span>' +
                                     '<span class="spark" style="--angle:60deg;--distance:25px;--spark-height:12px;background:#ff3b30;color:#ff3b30"></span>' +
@@ -583,6 +678,7 @@
                     
                             '<div class="fireworks">' +
                                 '<div class="firework right">' +
+                                    '<div class="explosion-core"></div>' +
                                     '<span class="spark" style="--angle:0deg;--distance:27px;--spark-height:14px;background:#00d4ff;color:#00d4ff"></span>' +
                                     '<span class="spark" style="--angle:30deg;--distance:29px;--spark-height:16px;background:#ff2d55;color:#ff2d55"></span>' +
                                     '<span class="spark" style="--angle:60deg;--distance:26px;--spark-height:13px;background:#ffd60a;color:#ffd60a"></span>' +
