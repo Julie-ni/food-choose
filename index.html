@@ -142,7 +142,7 @@
             transform-origin: 50% 100%;
             opacity: 0;
             filter: blur(0.35px);
-            animation: realistic-firework 1.5s cubic-bezier(0.12, 0.7, 0.25, 1) forwards;
+            animation: realistic-firework 1.5s linear forwards;
         }
 
         @keyframes realistic-firework {
@@ -153,10 +153,17 @@
                     rotate(var(--angle))
                     translateY(0)
                     scaleY(0.05);
+        
                 opacity: 0;
             }
         
-            8% {
+            6% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) * 0.18))
+                    scaleY(1);
+        
                 opacity: 1;
             }
         
@@ -164,44 +171,59 @@
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) * 0.35))
+                    translateY(calc(var(--distance) * 0.65))
                     scaleY(1);
+        
                 opacity: 1;
             }
         
-            42% {
+            35% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(var(--distance))
-                    scaleY(0.95);
+                    scaleY(0.92);
+        
                 opacity: 0.95;
             }
         
-            68% {
+            55% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 10px))
-                    scaleY(0.65);
-                opacity: 0.6;
+                    translateY(calc(var(--distance) + 8px))
+                    scaleY(0.72);
+        
+                opacity: 0.7;
+            }
+        
+            72% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) + 22px))
+                    scaleY(0.5);
+        
+                opacity: 0.42;
             }
         
             88% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 18px))
-                    scaleY(0.35);
-                opacity: 0.25;
+                    translateY(calc(var(--distance) + 38px))
+                    scaleY(0.28);
+        
+                opacity: 0.18;
             }
         
             100% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 25px))
+                    translateY(calc(var(--distance) + 55px))
                     scaleY(0.08);
+        
                 opacity: 0;
             }
         }
@@ -463,6 +485,10 @@
             {
                 name: "雞肉飯",
                 image: "JIANHONG.JPG"
+            },
+            {
+                name: "燒臘",
+                image: "BBQ.jpg"
             },
             {
                 name: "飯糰",
