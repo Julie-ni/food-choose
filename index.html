@@ -160,18 +160,23 @@
             content: "";
             position: absolute;
             left: 50%;
-            bottom: 2px;
-            width: 4px;
-            height: 30px;
-            border-radius: 50%;
+            bottom: 4px;
+            width: 6px;
+            height: 34px;
+            border-radius: 50% 50% 45% 45%;
             background: linear-gradient(
                 to bottom,
-                rgba(255, 255, 255, 0.95),
-                rgba(255, 214, 10, 0.85),
-                rgba(255, 170, 30, 0)
+                rgba(255, 255, 255, 1),
+                rgba(255, 255, 255, 0.95) 12%,
+                rgba(255, 214, 10, 0.9) 38%,
+                rgba(255, 170, 30, 0.55) 68%,
+                rgba(255, 150, 20, 0)
             );
             transform: translateX(-50%);
             filter: blur(1px);
+            box-shadow:
+                0 0 4px rgba(255, 255, 255, 0.9),
+                0 0 9px rgba(255, 214, 10, 0.7);
             animation: firework-trail 2s ease-out forwards;
         }
         
@@ -201,42 +206,42 @@
         
         @keyframes firework-trail {
             0% {
-                bottom: -8px;
-                height: 10px;
+                bottom: -4px;
+                height: 12px;
                 opacity: 0;
             }
         
-            15% {
+            12% {
                 opacity: 1;
             }
         
-            45% {
-                bottom: 45px;
+            35% {
+                bottom: 30px;
+                height: 38px;
+                opacity: 0.95;
+            }
+        
+            55% {
+                bottom: 62px;
                 height: 42px;
-                opacity: 0.9;
+                opacity: 0.85;
             }
         
-            65% {
-                bottom: 91px;
-                height: 28px;
-                opacity: 0.75;
+            75% {
+                bottom: 82px;
+                height: 30px;
+                opacity: 0.65;
             }
         
-            80% {
-                bottom: 91px;
+            88% {
+                bottom: 92px;
                 height: 18px;
-                opacity: 0.45;
-            }
-        
-            92% {
-                bottom: 91px;
-                height: 10px;
-                opacity: 0.2;
+                opacity: 0.4;
             }
         
             100% {
-                bottom: 91px;
-                height: 0;
+                bottom: 98px;
+                height: 8px;
                 opacity: 0;
                 visibility: hidden;
             }
