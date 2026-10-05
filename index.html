@@ -136,24 +136,23 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 2px;
-            height: 24px;
+            width: 3px;
+            height: var(--spark-height);
             border-radius: 50%;
             transform-origin: 50% 100%;
             opacity: 0;
-            filter: blur(0.2px);
-            animation: realistic-firework 1.5s ease-out forwards;
+            filter: blur(0.35px);
+            animation: realistic-firework 1.5s cubic-bezier(0.12, 0.7, 0.25, 1) forwards;
         }
 
         @keyframes realistic-firework {
-            
+
             0% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(0)
-                    scaleY(0.15);
-        
+                    scaleY(0.05);
                 opacity: 0;
             }
         
@@ -167,37 +166,42 @@
                     rotate(var(--angle))
                     translateY(calc(var(--distance) * 0.35))
                     scaleY(1);
-        
                 opacity: 1;
             }
-            
-            48% {
+        
+            42% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(var(--distance))
-                    scaleY(0.9);
-        
+                    scaleY(0.95);
                 opacity: 0.95;
             }
-
-            72% {
+        
+            68% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
-                    translateY(calc(var(--distance) + 12px))
+                    translateY(calc(var(--distance) + 10px))
                     scaleY(0.65);
-    
-                opacity: 0.55;
+                opacity: 0.6;
             }
-            
+        
+            88% {
+                transform:
+                    translate(-50%, -50%)
+                    rotate(var(--angle))
+                    translateY(calc(var(--distance) + 18px))
+                    scaleY(0.35);
+                opacity: 0.25;
+            }
+        
             100% {
                 transform:
                     translate(-50%, -50%)
                     rotate(var(--angle))
                     translateY(calc(var(--distance) + 25px))
-                    scaleY(0.25);
-        
+                    scaleY(0.08);
                 opacity: 0;
             }
         }
@@ -536,41 +540,41 @@
                         '<div class="fireworks">' +
 
                         '<div class="firework left">' +
-                        '<span class="spark" style="--angle:0deg;--distance:65px;background:#ffd60a"></span>' +
-                        '<span class="spark" style="--angle:22deg;--distance:60px;background:#ff9500"></span>' +
-                        '<span class="spark" style="--angle:45deg;--distance:55px;background:#ff3b30"></span>' +
-                        '<span class="spark" style="--angle:68deg;--distance:62px;background:#ff2d55"></span>' +
-                        '<span class="spark" style="--angle:90deg;--distance:58px;background:#af52de"></span>' +
-                        '<span class="spark" style="--angle:112deg;--distance:65px;background:#5ac8fa"></span>' +
-                        '<span class="spark" style="--angle:135deg;--distance:55px;background:#00d4ff"></span>' +
-                        '<span class="spark" style="--angle:158deg;--distance:62px;background:#34c759"></span>' +
-                        '<span class="spark" style="--angle:180deg;--distance:60px;background:#ffd60a"></span>' +
-                        '<span class="spark" style="--angle:202deg;--distance:55px;background:#ff9500"></span>' +
-                        '<span class="spark" style="--angle:225deg;--distance:65px;background:#ff3b30"></span>' +
-                        '<span class="spark" style="--angle:248deg;--distance:58px;background:#ff2d55"></span>' +
-                        '<span class="spark" style="--angle:270deg;--distance:62px;background:#af52de"></span>' +
-                        '<span class="spark" style="--angle:292deg;--distance:55px;background:#5ac8fa"></span>' +
-                        '<span class="spark" style="--angle:315deg;--distance:65px;background:#00d4ff"></span>' +
-                        '<span class="spark" style="--angle:338deg;--distance:58px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:0deg;--distance:65px;--spark-height:22px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:22deg;--distance:60px;--spark-height:30px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:45deg;--distance:55px;--spark-height:19px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:68deg;--distance:62px;--spark-height:27px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:90deg;--distance:58px;--spark-height:23px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:112deg;--distance:65px;--spark-height:31px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:135deg;--distance:55px;--spark-height:20px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:158deg;--distance:62px;--spark-height:28px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:180deg;--distance:60px;--spark-height:24px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:202deg;--distance:55px;--spark-height:18px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:225deg;--distance:65px;--spark-height:29px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:248deg;--distance:58px;--spark-height:22px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:270deg;--distance:62px;--spark-height:30px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:292deg;--distance:55px;--spark-height:19px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:315deg;--distance:65px;--spark-height:27px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:338deg;--distance:58px;--spark-height:23px;background:#34c759"></span>' +
                         '</div>' +
 
                         '<div class="firework right">' +
-                        '<span class="spark" style="--angle:0deg;--distance:58px;background:#00d4ff"></span>' +
-                        '<span class="spark" style="--angle:25deg;--distance:65px;background:#ff2d55"></span>' +
-                        '<span class="spark" style="--angle:48deg;--distance:55px;background:#ffd60a"></span>' +
-                        '<span class="spark" style="--angle:72deg;--distance:62px;background:#ff9500"></span>' +
-                        '<span class="spark" style="--angle:95deg;--distance:55px;background:#34c759"></span>' +
-                        '<span class="spark" style="--angle:118deg;--distance:65px;background:#5ac8fa"></span>' +
-                        '<span class="spark" style="--angle:140deg;--distance:58px;background:#af52de"></span>' +
-                        '<span class="spark" style="--angle:165deg;--distance:62px;background:#ff3b30"></span>' +
-                        '<span class="spark" style="--angle:188deg;--distance:55px;background:#00d4ff"></span>' +
-                        '<span class="spark" style="--angle:212deg;--distance:65px;background:#ff2d55"></span>' +
-                        '<span class="spark" style="--angle:235deg;--distance:58px;background:#ffd60a"></span>' +
-                        '<span class="spark" style="--angle:258deg;--distance:62px;background:#ff9500"></span>' +
-                        '<span class="spark" style="--angle:280deg;--distance:55px;background:#34c759"></span>' +
-                        '<span class="spark" style="--angle:303deg;--distance:65px;background:#5ac8fa"></span>' +
-                        '<span class="spark" style="--angle:326deg;--distance:58px;background:#af52de"></span>' +
-                        '<span class="spark" style="--angle:350deg;--distance:62px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:0deg;--distance:58px;--spark-height:23px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:25deg;--distance:65px;--spark-height:29px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:48deg;--distance:55px;--spark-height:20px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:72deg;--distance:62px;--spark-height:28px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:95deg;--distance:55px;--spark-height:18px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:118deg;--distance:65px;--spark-height:31px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:140deg;--distance:58px;--spark-height:22px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:165deg;--distance:62px;--spark-height:27px;background:#ff3b30"></span>' +
+                        '<span class="spark" style="--angle:188deg;--distance:55px;--spark-height:19px;background:#00d4ff"></span>' +
+                        '<span class="spark" style="--angle:212deg;--distance:65px;--spark-height:30px;background:#ff2d55"></span>' +
+                        '<span class="spark" style="--angle:235deg;--distance:58px;--spark-height:24px;background:#ffd60a"></span>' +
+                        '<span class="spark" style="--angle:258deg;--distance:62px;--spark-height:28px;background:#ff9500"></span>' +
+                        '<span class="spark" style="--angle:280deg;--distance:55px;--spark-height:20px;background:#34c759"></span>' +
+                        '<span class="spark" style="--angle:303deg;--distance:65px;--spark-height:31px;background:#5ac8fa"></span>' +
+                        '<span class="spark" style="--angle:326deg;--distance:58px;--spark-height:23px;background:#af52de"></span>' +
+                        '<span class="spark" style="--angle:350deg;--distance:62px;--spark-height:27px;background:#ff3b30"></span>' +
                         '</div>' +
 
                         '</div>';
