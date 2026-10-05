@@ -245,9 +245,15 @@
             position: absolute;
             left: 50%;
             bottom: 105px;
-            width: 3px;
+            width: 5px;
             height: var(--spark-height);
-            border-radius: 100% 100% 40% 40%;
+            clip-path: polygon(
+                20% 0%,
+                80% 0%,
+                62% 55%,
+                50% 100%,
+                38% 55%
+            );
             transform-origin: 50% 0%;
             opacity: 0;
             filter: blur(0.2px);
