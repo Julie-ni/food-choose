@@ -118,7 +118,24 @@
             height: 6px;
             border-radius: 50%;
             transform: translateX(-50%);
-            animation: firework-hide 1.35s linear 0.82s forwards;
+        }
+
+        .explosion-core {
+            position: absolute;
+            left: 50%;
+            bottom: 105px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow:
+                0 0 6px #fff,
+                0 0 14px #ffd60a,
+                0 0 24px rgba(255, 180, 50, 0.9);
+            transform: translate(-50%, 50%) scale(0);
+            opacity: 0;
+        
+            animation: explosion-core 0.75s ease-out 0.82s forwards;
         }
         
         .firework::after {
@@ -154,7 +171,7 @@
             );
             transform: translateX(-50%);
             filter: blur(1px);
-            animation: firework-trail 0.9s ease-out forwards;
+            animation: firework-trail 2s ease-out forwards;
         }
         
         @keyframes firework-launch {
@@ -176,7 +193,7 @@
         
             100% {
                 bottom: 105px;
-                opacity: 1;
+                opacity: 0;
                 transform: translateX(-50%) scale(0.8);
             }
         }
@@ -192,15 +209,35 @@
                 opacity: 1;
             }
         
-            70% {
+            45% {
+                bottom: 45px;
                 height: 42px;
                 opacity: 0.9;
+            }
+        
+            65% {
+                bottom: 91px;
+                height: 28px;
+                opacity: 0.75;
+            }
+        
+            80% {
+                bottom: 91px;
+                height: 18px;
+                opacity: 0.45;
+            }
+        
+            92% {
+                bottom: 91px;
+                height: 10px;
+                opacity: 0.2;
             }
         
             100% {
                 bottom: 91px;
                 height: 0;
                 opacity: 0;
+                visibility: hidden;
             }
         }
         
@@ -450,21 +487,6 @@
             .main-card {
                 padding: 20px 10px;
                 border-radius: 24px;
-            }
-        }
-
-        @keyframes firework-hide {
-            0% {
-                opacity: 1;
-            }
-        
-            90% {
-                opacity: 1;
-            }
-        
-            100% {
-                opacity: 0;
-                visibility: hidden;
             }
         }
 
