@@ -161,23 +161,24 @@
             position: absolute;
             left: 50%;
             bottom: 4px;
-            width: 6px;
+            width: 5px;
             height: 34px;
-            border-radius: 50% 50% 45% 45%;
+            border-radius: 50%;
             background: linear-gradient(
                 to bottom,
                 rgba(255, 255, 255, 1),
-                rgba(255, 255, 255, 0.95) 12%,
-                rgba(255, 214, 10, 0.9) 38%,
-                rgba(255, 170, 30, 0.55) 68%,
+                rgba(255, 255, 255, 0.95) 15%,
+                rgba(255, 214, 10, 0.9) 40%,
+                rgba(255, 170, 30, 0.55) 70%,
                 rgba(255, 150, 20, 0)
             );
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(0);
+            transform-origin: 50% 0%;
             filter: blur(1px);
             box-shadow:
                 0 0 4px rgba(255, 255, 255, 0.9),
                 0 0 9px rgba(255, 214, 10, 0.7);
-            animation: firework-trail 2s ease-out forwards;
+            animation: firework-trail 0.9s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
         }
         
         @keyframes firework-launch {
@@ -206,42 +207,21 @@
         
         @keyframes firework-trail {
             0% {
-                bottom: -4px;
-                height: 12px;
+                transform: translateX(-50%) translateY(0) scaleY(0.35);
                 opacity: 0;
             }
         
-            12% {
+            10% {
                 opacity: 1;
             }
         
-            35% {
-                bottom: 30px;
-                height: 38px;
-                opacity: 0.95;
-            }
-        
-            55% {
-                bottom: 62px;
-                height: 42px;
-                opacity: 0.85;
-            }
-        
             75% {
-                bottom: 82px;
-                height: 30px;
-                opacity: 0.65;
-            }
-        
-            88% {
-                bottom: 92px;
-                height: 18px;
-                opacity: 0.4;
+                transform: translateX(-50%) translateY(0) scaleY(1);
+                opacity: 0.9;
             }
         
             100% {
-                bottom: 98px;
-                height: 8px;
+                transform: translateX(-50%) translateY(0) scaleY(0.7);
                 opacity: 0;
                 visibility: hidden;
             }
