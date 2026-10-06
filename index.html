@@ -52,52 +52,61 @@
             content: "";
             position: absolute;
         
-            left: -2px;
-            top: -2px;
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
+            left: -5px;
+            top: -5px;
+            width: calc(100% + 10px);
+            height: calc(100% + 10px);
         
             border-radius: 50%;
         
             background:
                 radial-gradient(
-                    ellipse 70% 42% at 50% 10%,
-                    rgba(255, 255, 255, 0.42) 0%,
-                    rgba(255, 255, 255, 0.24) 22%,
-                    rgba(255, 255, 255, 0.10) 45%,
-                    rgba(255, 255, 255, 0) 75%
-                ),
-                radial-gradient(
-                    ellipse 92% 78% at 50% 12%,
-                    rgba(255, 255, 255, 0.10) 0%,
-                    rgba(255, 255, 255, 0.035) 48%,
+                    ellipse 65% 32% at 50% 8%,
+                    rgba(255, 255, 255, 0.58) 0%,
+                    rgba(255, 255, 255, 0.30) 28%,
+                    rgba(255, 255, 255, 0.08) 58%,
                     rgba(255, 255, 255, 0) 78%
                 ),
+        
+                radial-gradient(
+                    ellipse 88% 92% at 50% 18%,
+                    rgba(255, 255, 255, 0.13) 0%,
+                    rgba(255, 255, 255, 0.06) 42%,
+                    rgba(255, 255, 255, 0.015) 70%,
+                    rgba(255, 255, 255, 0) 86%
+                ),
+        
                 linear-gradient(
                     to bottom,
-                    rgba(255, 255, 255, 0.10) 0%,
-                    rgba(255, 255, 255, 0.035) 35%,
-                    rgba(255, 255, 255, 0.00) 58%,
-                    rgba(80, 0, 0, 0.10) 88%,
-                    rgba(60, 0, 0, 0.18) 100%
+                    rgba(255, 255, 255, 0.06) 0%,
+                    rgba(255, 255, 255, 0.025) 45%,
+                    rgba(255, 255, 255, 0) 62%,
+                    rgba(80, 0, 0, 0.08) 82%,
+                    rgba(45, 0, 0, 0.20) 100%
                 );
         
-            border: 1px solid rgba(255, 255, 255, 0.32);
+            border: 1px solid rgba(255, 255, 255, 0.45);
         
             box-shadow:
-                inset 0 3px 5px rgba(255, 255, 255, 0.65),
-                inset 0 10px 18px rgba(255, 255, 255, 0.10),
-                inset 7px 0 10px rgba(255, 255, 255, 0.08),
-                inset -7px 0 10px rgba(70, 0, 0, 0.08),
-                inset 0 -8px 12px rgba(70, 0, 0, 0.16),
-                0 1px 2px rgba(255, 255, 255, 0.18);
+                inset 0 4px 7px rgba(255, 255, 255, 0.80),
         
-            backdrop-filter: blur(1.2px);
-            -webkit-backdrop-filter: blur(1.2px);
+                inset 0 14px 22px rgba(255, 255, 255, 0.12),
+        
+                inset 9px 0 14px rgba(255, 255, 255, 0.10),
+        
+                inset -9px 0 14px rgba(55, 0, 0, 0.10),
+        
+                inset 0 -10px 16px rgba(55, 0, 0, 0.22),
+        
+                0 0 3px rgba(255, 255, 255, 0.22);
+        
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
         
             pointer-events: none;
             z-index: 2;
         }
+        
         #start-button:active {
             transform: translateX(-50%) translateY(8px);
             box-shadow: 0 0 0 #b71c1c;
