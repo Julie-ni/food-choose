@@ -589,10 +589,110 @@
             }
         }
 
+        #meal-selector {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            background: #fff8ef;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        
+        #meal-selector h2 {
+            margin: 0 0 40px;
+            font-size: 32px;
+        }
+        
+        .meal-options {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+        
+        .meal-button {
+            width: 130px;
+            height: 160px;
+            border: none;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            box-shadow:
+                0 6px 0 rgba(0, 0, 0, 0.12),
+                0 10px 20px rgba(0, 0, 0, 0.12);
+            transition: transform 0.15s ease;
+        }
+        
+        .meal-button:active {
+            transform: translateY(4px);
+            box-shadow:
+                0 2px 0 rgba(0, 0, 0, 0.12),
+                0 5px 12px rgba(0, 0, 0, 0.10);
+        }
+        
+        .meal-button.lunch {
+            background: #fff3b0;
+        }
+        
+        .meal-button.dinner {
+            background: #dfe7ff;
+        }
+        
+        .meal-icon {
+            font-size: 56px;
+            line-height: 1;
+        }
+        
+        .meal-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        #meal-selector.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 600px) {
+            .meal-options {
+                gap: 14px;
+            }
+        
+            .meal-button {
+                width: 125px;
+                height: 155px;
+            }
+        }
+
 </style>    
 </head>
 
 <body>
+
+    <div id="meal-selector">
+        <h2>今天要吃什麼？</h2>
+
+        <div class="meal-options">
+            <button class="meal-button lunch" onclick="selectMeal('lunch')">
+                <span class="meal-icon">☀️</span>
+                <span class="meal-text">中餐</span>
+            </button>
+
+            <button class="meal-button dinner" onclick="selectMeal('dinner')">
+                <span class="meal-icon">🌙</span>
+                <span class="meal-text">晚餐</span>
+            </button>
+        </div>
+    </div>
 
     <div id="food-wall" aria-hidden="true"></div>
 
@@ -618,102 +718,36 @@
         </div>
     </div>
 
-    <script>
+<script>
 
         const foods = [
-            {
-                name: "麥當勞",
-                image: "MCDONALD.JPG"
-            },
-            {
-                name: "義大利麵",
-                image: "KIRINPASTA.JPG"
-            },
-            {
-                name: "摩斯",
-                image: "MOS.JPG"
-            },
-            {
-                name: "丼飯",
-                image: "SUKIYA.JPG"
-            },
-            {
-                name: "健康餐",
-                image: "GETPOWER.jpg"
-            },
-            {
-                name: "水餃 / 鍋貼",
-                image: "BAFANG.JPG"
-            },
-            {
-                name: "炸雞",
-                image: "21PLUS.JPG"
-            },
-            {
-                name: "漢堡王",
-                image: "BURGERKING.JPG"
-            },
-            {
-                name: "肯德基",
-                image: "KFC.JPG"
-            },
-            {
-                name: "關東煮 / 甜不辣",
-                image: "TWOFISH.JPG"
-            },
-            {
-                name: "鑫吉野烤肉飯",
-                image: "XINJIYE.JPG"
-            },
-            {
-                name: "雞肉本家",
-                image: "CHICKENBENJIA.JPG"
-            },
-            {
-                name: "粽子",
-                image: "ZHENPINJIURU.JPG"
-            },
-            {
-                name: "牛肉麵",
-                image: "579.JPG"
-            },
-            {
-                name: "小樂天",
-                image: "XIAOLETIAN.JPG"
-            },
-            {
-                name: "烤肉飯",
-                image: "KAOSHIFU.JPG"
-            },
-            {
-                name: "米糕",
-                image: "WEIJIA.JPG"
-            },
-            {
-                name: "咖哩飯",
-                image: "LANE30.JPG"
-            },
-            {
-                name: "豆漿",
-                image: "HONGJI.JPG"
-            },
-            {
-                name: "傻瓜麵",
-                image: "FOOL.JPG"
-            },
-            {
-                name: "雞肉飯",
-                image: "JIANHONG.JPG"
-            },
-            {
-                name: "燒臘",
-                image: "BBQ.JPG"
-            },
-            {
-                name: "飯糰",
-                image: "ONIGIRIPLANET.jpg"
-            }
+            { name: "麥當勞", image: "MCDONALD.JPG", meals: ["lunch", "dinner"] },
+            { name: "SUBWAY", image: "SUBWAY.JPG", meals: ["dinner"] },
+            { name: "義大利麵", image: "KIRINPASTA.JPG", meals: ["lunch", "dinner"] },
+            { name: "摩斯", image: "MOS.JPG", meals: ["lunch", "dinner"] },
+            { name: "丼飯", image: "SUKIYA.JPG", meals: ["lunch", "dinner"] },
+            { name: "健康餐", image: "GETPOWER.jpg", meals: ["lunch"] },
+            { name: "水餃 / 鍋貼", image: "BAFANG.JPG", meals: ["lunch", "dinner"] },
+            { name: "炸雞", image: "21PLUS.JPG", meals: ["dinner"] },
+            { name: "漢堡王", image: "BURGERKING.JPG", meals: ["lunch", "dinner"] },
+            { name: "肯德基", image: "KFC.JPG", meals: ["lunch", "dinner"] },
+            { name: "關東煮 / 甜不辣", image: "TWOFISH.JPG", meals: ["lunch", "dinner"] },
+            { name: "鑫吉野烤肉飯", image: "XINJIYE.JPG", meals: ["lunch", "dinner"] },
+            { name: "雞肉本家", image: "CHICKENBENJIA.JPG", meals: ["lunch", "dinner"] },
+            { name: "粽子", image: "ZHENPINJIURU.JPG", meals: ["lunch", "dinner"] },
+            { name: "牛肉麵", image: "579.JPG", meals: ["dinner"] },
+            { name: "小樂天", image: "XIAOLETIAN.JPG", meals: ["dinner"] },
+            { name: "烤肉飯", image: "KAOSHIFU.JPG", meals: ["lunch", "dinner"] },
+            { name: "米糕", image: "WEIJIA.JPG", meals: ["dinner"] },
+            { name: "咖哩飯", image: "LANE30.JPG", meals: ["lunch", "dinner"] },
+            { name: "豆漿", image: "HONGJI.JPG", meals: ["dinner"] },
+            { name: "傻瓜麵", image: "FOOL.JPG", meals: ["lunch", "dinner"] },
+            { name: "雞肉飯", image: "JIANHONG.JPG", meals: ["lunch", "dinner"] },
+            { name: "燒臘", image: "BBQ.JPG", meals: ["lunch"] },
+            { name: "飯糰", image: "ONIGIRIPLANET.jpg", meals: ["lunch", "dinner"] }
         ];
+
+        let availableFoods = foods;
 
         foods.forEach(function(food) {
             const img = new Image();
@@ -739,16 +773,39 @@
             foodList.classList.toggle("food-list-hidden");
         }
 
-        for (let i = 0; i < 60; i++) {
-            const food = foods[i % foods.length];
-    
-            const img = document.createElement("img");
-            img.src = food.image;
-            img.alt = "";
-            img.className = "wall-food";
-            img.loading = "eager";
+        function selectMeal(meal) {
+            availableFoods = foods.filter(function(food) {
+                return food.meals.includes(meal);
+            });
         
-            foodWall.appendChild(img);
+            foodListItems.innerHTML = "";
+        
+            availableFoods.forEach(function(food) {
+                const item = document.createElement("div");
+                item.className = "food-list-item";
+                item.textContent = food.name;
+                foodListItems.appendChild(item);
+            });
+        
+            updateFoodWall();
+        
+            document.getElementById("meal-selector").classList.add("hidden");
+        }
+        
+        function updateFoodWall() {
+            foodWall.innerHTML = "";
+        
+            for (let i = 0; i < 60; i++) {
+                const food = availableFoods[i % availableFoods.length];
+        
+                const img = document.createElement("img");
+                img.src = food.image;
+                img.alt = "";
+                img.className = "wall-food";
+                img.loading = "eager";
+        
+                foodWall.appendChild(img);
+            }
         }
 
         function chooseFood() {
@@ -765,8 +822,8 @@
 
             function showRandomFood() {
 
-                const randomIndex = Math.floor(Math.random() * foods.length);
-                const food = foods[randomIndex];
+                const randomIndex = Math.floor(Math.random() * availableFoods.length);
+                const food = availableFoods[randomIndex];
 
                 document.getElementById("result").innerHTML =
                     '<img src="' + food.image + '" class="food-image">' +
