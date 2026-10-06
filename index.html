@@ -52,75 +52,69 @@
             position: absolute;
             left: 50%;
             bottom: 60px;
-            width: 116px;
-            height: 124px;
+            width: 100px;
+            height: 100px;
             transform: translateX(-50%);
             z-index: 10;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
         }
         
         .glass-dome {
             position: absolute;
-            left: 50%;
-            top: -12px;
-            width: 116px;
-            height: 124px;
-            transform: translateX(-50%);
-            border-radius: 50% 50% 44% 44% / 58% 58% 42% 42%;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%;
         
             background:
                 radial-gradient(
-                    ellipse 52% 38% at 50% 9%,
-                    rgba(255, 255, 255, 0.72) 0%,
-                    rgba(255, 255, 255, 0.38) 18%,
-                    rgba(255, 255, 255, 0.12) 42%,
+                    ellipse 58% 42% at 50% 8%,
+                    rgba(255, 255, 255, 0.62) 0%,
+                    rgba(255, 255, 255, 0.24) 22%,
+                    rgba(255, 255, 255, 0.06) 48%,
                     rgba(255, 255, 255, 0) 72%
                 ),
         
                 radial-gradient(
-                    ellipse 30% 65% at 10% 30%,
-                    rgba(255, 255, 255, 0.30) 0%,
-                    rgba(255, 255, 255, 0.12) 35%,
+                    ellipse 28% 62% at 10% 30%,
+                    rgba(255, 255, 255, 0.20) 0%,
+                    rgba(255, 255, 255, 0.07) 38%,
                     rgba(255, 255, 255, 0) 75%
                 ),
         
                 radial-gradient(
-                    ellipse 25% 62% at 91% 28%,
-                    rgba(255, 255, 255, 0.16) 0%,
-                    rgba(255, 255, 255, 0.06) 38%,
+                    ellipse 25% 58% at 90% 28%,
+                    rgba(255, 255, 255, 0.12) 0%,
+                    rgba(255, 255, 255, 0.035) 40%,
                     rgba(255, 255, 255, 0) 78%
                 ),
         
                 radial-gradient(
-                    ellipse 76% 72% at 50% 45%,
-                    rgba(255, 255, 255, 0.055) 0%,
-                    rgba(255, 255, 255, 0.018) 48%,
+                    ellipse 78% 72% at 50% 45%,
+                    rgba(255, 255, 255, 0.025) 0%,
+                    rgba(255, 255, 255, 0.008) 48%,
                     rgba(255, 255, 255, 0) 78%
                 ),
         
                 radial-gradient(
-                    ellipse 78% 25% at 50% 93%,
-                    rgba(255, 255, 255, 0.30) 0%,
-                    rgba(255, 255, 255, 0.12) 28%,
-                    rgba(70, 0, 0, 0.12) 58%,
-                    rgba(30, 0, 0, 0.30) 82%,
+                    ellipse 76% 24% at 50% 94%,
+                    rgba(255, 255, 255, 0.18) 0%,
+                    rgba(255, 255, 255, 0.06) 30%,
+                    rgba(65, 0, 0, 0.08) 58%,
+                    rgba(30, 0, 0, 0.18) 82%,
                     rgba(30, 0, 0, 0) 100%
                 );
         
-            border: 2px solid rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(255, 255, 255, 0.32);
         
             box-shadow:
-                inset 0 7px 10px rgba(255, 255, 255, 0.68),
-                inset 10px 0 16px rgba(255, 255, 255, 0.16),
-                inset -10px 0 16px rgba(50, 0, 0, 0.12),
-                inset 0 -12px 17px rgba(35, 0, 0, 0.30),
-                0 0 7px rgba(255, 255, 255, 0.30),
-                0 5px 10px rgba(0, 0, 0, 0.10);
+                inset 0 5px 8px rgba(255, 255, 255, 0.42),
+                inset 7px 0 12px rgba(255, 255, 255, 0.08),
+                inset -7px 0 12px rgba(50, 0, 0, 0.06),
+                inset 0 -8px 12px rgba(35, 0, 0, 0.18);
         
-            backdrop-filter: blur(1.5px);
-            -webkit-backdrop-filter: blur(1.5px);
+            backdrop-filter: blur(0.8px);
+            -webkit-backdrop-filter: blur(0.8px);
         
             pointer-events: none;
             z-index: 3;
@@ -131,27 +125,27 @@
             position: absolute;
             left: 50%;
             top: 5px;
-            width: 72px;
-            height: 30px;
-            transform: translateX(-50%) rotate(-4deg);
+            width: 58px;
+            height: 24px;
+            transform: translateX(-50%) rotate(-5deg);
         
             border-radius: 50%;
         
-            border-top: 5px solid rgba(255, 255, 255, 0.72);
-            border-left: 2px solid rgba(255, 255, 255, 0.18);
-            border-right: 2px solid rgba(255, 255, 255, 0.10);
+            border-top: 4px solid rgba(255, 255, 255, 0.68);
+            border-left: 1px solid rgba(255, 255, 255, 0.14);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
         
-            filter: blur(0.4px);
-            opacity: 0.85;
+            filter: blur(0.5px);
+            opacity: 0.78;
         }
         
         .glass-dome::after {
             content: "";
             position: absolute;
             left: 50%;
-            bottom: 5px;
-            width: 91px;
-            height: 18px;
+            bottom: 4px;
+            width: 76px;
+            height: 14px;
             transform: translateX(-50%);
         
             border-radius: 50%;
@@ -159,16 +153,15 @@
             background:
                 radial-gradient(
                     ellipse at center,
-                    rgba(255, 255, 255, 0.18) 0%,
-                    rgba(255, 255, 255, 0.07) 38%,
+                    rgba(255, 255, 255, 0.12) 0%,
+                    rgba(255, 255, 255, 0.04) 42%,
                     rgba(255, 255, 255, 0) 72%
                 );
         
-            border-top: 2px solid rgba(255, 255, 255, 0.30);
+            border-top: 1.5px solid rgba(255, 255, 255, 0.24);
         
             box-shadow:
-                0 -2px 5px rgba(255, 255, 255, 0.18),
-                inset 0 3px 5px rgba(255, 255, 255, 0.12);
+                0 -2px 4px rgba(255, 255, 255, 0.14);
         
             pointer-events: none;
         }
@@ -791,6 +784,7 @@
 
         function chooseFood() {
             document.getElementById("start-button").style.visibility = "hidden";
+            document.querySelector(".glass-dome").style.visibility = "hidden";
 
             let count = 0;
 
@@ -865,6 +859,7 @@
 
                     setTimeout(function() {
                         document.getElementById("start-button").style.visibility = "visible";
+                        document.querySelector(".glass-dome").style.visibility = "visible";
                         document.querySelector(".restart-text").style.visibility = "visible";
                     }, 1500);
                 }
