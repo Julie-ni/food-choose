@@ -493,7 +493,37 @@
             box-shadow: 0 8px 24px rgba(120, 75, 35, 0.08);
             box-sizing: border-box;
         }
-    
+
+        #back-button {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 30;
+            width: 52px;
+            height: 52px;
+            border: none;
+            border-radius: 50%;
+            background: #e53935;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 52px;
+            padding: 0;
+            box-shadow:
+                0 5px 0 #b71c1c,
+                0 8px 14px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+        }
+        
+        #back-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #b71c1c;
+        }
+        
+        #back-button.hidden {
+            display: none;
+        }
+        
         #list-button {
             position: fixed;
             right: 18px;
@@ -696,8 +726,10 @@
 
     <div id="food-wall" aria-hidden="true"></div>
 
-    <button id="list-button" onclick="toggleFoodList()">LIST</button>
+    <button id="back-button" class="hidden" onclick="backToMealSelector()">←</button>
 
+    <button id="list-button" onclick="toggleFoodList()">LIST</button>
+    
     <main class="main-card">
         <h1>要吃什麼咧？</h1>
 
@@ -790,6 +822,7 @@
             updateFoodWall();
         
             document.getElementById("meal-selector").classList.add("hidden");
+            document.getElementById("back-button").classList.remove("hidden");
         }
         
         function updateFoodWall() {
@@ -808,8 +841,21 @@
             }
         }
 
+        function backToMealSelector() {
+            document.getElementById("meal-selector").classList.remove("hidden");
+            document.getElementById("back-button").classList.add("hidden");
+        
+            document.getElementById("start-button").style.visibility = "visible";
+            document.querySelector(".glass-dome").style.visibility = "visible";
+        
+            document.getElementById("result").innerHTML = "手黑黑還是白白！？";
+        
+            foodWall.innerHTML = "";
+        }
+    
         function chooseFood() {
             document.getElementById("start-button").style.visibility = "hidden";
+            document.getElementById("back-button").classList.add("hidden");
             document.querySelector(".glass-dome").style.visibility = "hidden";
 
             let count = 0;
@@ -887,6 +933,7 @@
                         document.getElementById("start-button").style.visibility = "visible";
                         document.querySelector(".glass-dome").style.visibility = "visible";
                         document.querySelector(".restart-text").style.visibility = "visible";
+                        document.getElementById("back-button").classList.remove("hidden");
                     }, 1500);
                 }
             }
