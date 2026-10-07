@@ -516,22 +516,18 @@
         }
 
         .u-turn-arrow {
-            position: relative;
             display: block;
-            width: 42px;
-            height: 42px;
-            background: white;
-            clip-path: polygon(
-                100% 18%,
-                28% 18%,
-                28% 0%,
-                0% 50%,
-                28% 100%,
-                28% 82%,
-                38% 82%,
-                38% 55%,
-                100% 55%
-            );
+            width: 40px;
+            height: 40px;
+            overflow: visible;
+        }
+        
+        .u-turn-arrow path {
+            fill: none;
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: butt;
+            stroke-linejoin: round;
         }
         
         #back-button:active {
@@ -656,7 +652,7 @@
             margin: 0 0 40px;
             font-size: 32px;
             position: absolute;
-            top: 28vh;
+            top: 10vh;
             transform: translateY(-50%);
         }
         
@@ -752,7 +748,10 @@
     <div id="food-wall" aria-hidden="true"></div>
 
     <button id="back-button" class="hidden" onclick="backToMealSelector()">
-        <span class="u-turn-arrow"></span>
+        <svg class="u-turn-arrow" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M8 8 H27 V30 H5" />
+            <path d="M11 24 L5 30 L11 36" />
+        </svg>
     </button>
 
     <button id="list-button" onclick="toggleFoodList()">LIST</button>
