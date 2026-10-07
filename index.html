@@ -518,40 +518,20 @@
         .u-turn-arrow {
             position: relative;
             display: block;
-            width: 26px;
-            height: 18px;
-            border-top: 4px solid white;
-            border-right: 4px solid white;
-            border-radius: 0 10px 0 0;
-            transform: translateX(1px);
-        }
-        
-        .u-turn-arrow::before {
-            content: "";
-            position: absolute;
-            left: -14px;
-            top: 50%;
-            width: 44px;
-            height: 4px;
-            background: white;
-            transform: translateY(-50%);
-            border-radius: 2px;
-        }
-        
-        .u-turn-arrow::after {
-            content: "";
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            width: 11px;
-            height: 11px;
+            width: 42px;
+            height: 42px;
             background: white;
             clip-path: polygon(
-                100% 0%,
-                100% 100%,
-                0% 50%
+                100% 18%,
+                28% 18%,
+                28% 0%,
+                0% 50%,
+                28% 100%,
+                28% 82%,
+                38% 82%,
+                38% 55%,
+                100% 55%
             );
-            transform: translateY(-50%);
         }
         
         #back-button:active {
@@ -676,7 +656,7 @@
             margin: 0 0 40px;
             font-size: 32px;
             position: absolute;
-            top: 31vh;
+            top: 28vh;
             transform: translateY(-50%);
         }
         
