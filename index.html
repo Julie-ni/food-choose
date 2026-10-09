@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>要吃什麼咧？</title>
+    <title>餐點選擇器</title>
 
     <style>
         body {
@@ -444,7 +444,7 @@
             }
         }
         
-        #food-wall {
+       #food-wall {
             position: fixed;
             top: 0;
             left: 0;
@@ -459,6 +459,15 @@
             overflow: hidden;
             pointer-events: none;
             box-sizing: border-box;
+            background: #d6e8f5;
+        }
+
+        #food-wall.lunch-wall {
+            background: #d6e8f5;
+        }
+        
+        #food-wall.dinner-wall {
+            background: #353535;
         }
         
         .wall-food {
@@ -761,7 +770,7 @@
     <button id="list-button" onclick="toggleFoodList()">LIST</button>
     
     <main class="main-card">
-        <h1>要吃什麼咧？</h1>
+        <h1 id="meal-title">要吃什麼咧？</h1>
 
         <div id="result">手黑黑還是白白！？</div>
 
@@ -837,6 +846,9 @@
         }
 
         function selectMeal(meal) {
+            document.getElementById("meal-title").textContent =
+                meal === "lunch" ? "午餐吃什麼？" : "晚餐咧？";
+        
             availableFoods = foods.filter(function(food) {
                 return food.meals.includes(meal);
             });
@@ -853,6 +865,9 @@
                 foodListItems.appendChild(item);
             });
         
+            foodWall.classList.remove("lunch-wall", "dinner-wall");
+            foodWall.classList.add(meal === "lunch" ? "lunch-wall" : "dinner-wall");
+            
             updateFoodWall();
         
             document.getElementById("meal-selector").classList.add("hidden");
