@@ -775,7 +775,7 @@
     <div id="food-list" class="food-list-hidden">
         <div class="food-list-box">
             <button id="list-close" onclick="toggleFoodList()">×</button>
-            <h2>餐點清單</h2>
+            <h2 id="food-list-title">餐點清單</h2>
             <div id="food-list-items"></div>
         </div>
     </div>
@@ -840,6 +840,9 @@
             availableFoods = foods.filter(function(food) {
                 return food.meals.includes(meal);
             });
+            
+            document.getElementById("food-list-title").textContent =
+                meal === "lunch" ? "中餐清單" : "晚餐清單";
         
             foodListItems.innerHTML = "";
         
