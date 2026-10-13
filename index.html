@@ -594,12 +594,35 @@
         }
 
         .food-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
             padding: 10px;
             border-radius: 12px;
             background: #fff8ef;
             text-align: left;
             font-size: 16px;
             font-weight: bold;
+            min-width: 0;
+        }
+        
+        .food-list-name {
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        
+        .food-delete-button {
+            flex-shrink: 0;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 8px;
+            background: #e53935;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
         }
             
         @media (max-width: 600px) {
@@ -757,7 +780,7 @@
 
 <script>
 
-        const foods = [
+        let foods = [
             { name: "麥當勞", image: "MCDONALD.JPG", meals: ["lunch", "dinner"] },
             { name: "SUBWAY", image: "SUBWAY.JPG", meals: ["dinner"] },
             { name: "義大利麵", image: "KIRINPASTA.JPG", meals: ["lunch", "dinner"] },
@@ -785,7 +808,28 @@
             { name: "新娘子", image: "BRIDE.JPG", meals: ["lunch", "dinner"] },
         ];
 
+        const DELETED_FOODS_KEY = "mealSelectorDeletedFoods";
+
+        let deletedFoodNames = new Set();
+
+        try {
+            const savedDeletedFoods = JSON.parse(
+                localStorage.getItem(DELETED_FOODS_KEY) || "[]"
+            );
+
+            if (Array.isArray(savedDeletedFoods)) {
+                deletedFoodNames = new Set(savedDeletedFoods);
+            }
+        } catch (error) {
+            console.error("讀取刪除紀錄失敗：", error);
+        }
+
+        foods = foods.filter(function(food) {
+            return !deletedFoodNames.has(food.name);
+        });
+
         let availableFoods = foods;
+        let currentMeal = "total";
 
         foods.forEach(function(food) {
             const img = new Image();
@@ -796,44 +840,114 @@
         
         const foodListItems = document.getElementById("food-list-items");
 
-        foods.forEach(function(food) {
-            const item = document.createElement("div");
+        function renderFoodList() {
+            foodListItems.innerHTML = "";
         
-            item.className = "food-list-item";
-            item.textContent = food.name;
+            let listFoods;
         
-            foodListItems.appendChild(item);
-        });
-
+            if (currentMeal === "total") {
+                listFoods = foods;
+                document.getElementById("food-list-title").textContent =
+                    "TOTAL LIST";
+            } else {
+                listFoods = availableFoods;
+        
+                document.getElementById("food-list-title").textContent =
+                    currentMeal === "lunch"
+                        ? "☀️ 午餐清單"
+                        : "🌙 晚餐清單";
+            }
+        
+            listFoods.forEach(function(food) {
+                const item = document.createElement("div");
+                item.className = "food-list-item";
+        
+                const name = document.createElement("span");
+                name.className = "food-list-name";
+                name.textContent = food.name;
+        
+                item.appendChild(name);
+        
+                if (currentMeal === "total") {
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "food-delete-button";
+                    deleteButton.textContent = "刪除";
+                    deleteButton.type = "button";
+        
+                    deleteButton.addEventListener("click", function() {
+                        deleteFood(food);
+                    });
+        
+                    item.appendChild(deleteButton);
+                }
+        
+                foodListItems.appendChild(item);
+            });
+        }
+        
+        function deleteFood(food) {
+            const index = foods.indexOf(food);
+        
+            if (index === -1) return;
+        
+            deletedFoodNames.add(food.name);
+        
+            try {
+                localStorage.setItem(
+                    DELETED_FOODS_KEY,
+                    JSON.stringify([...deletedFoodNames])
+                );
+            } catch (error) {
+                deletedFoodNames.delete(food.name);
+                alert("無法保存刪除紀錄，請檢查瀏覽器儲存設定。");
+                return;
+            }
+        
+            foods.splice(index, 1);
+        
+            if (currentMeal !== "total") {
+                availableFoods = foods.filter(function(item) {
+                    return item.meals.includes(currentMeal);
+                });
+            } else {
+                availableFoods = foods;
+            }
+        
+            renderFoodList();
+        
+            if (currentMeal !== "total") {
+                if (availableFoods.length > 0) {
+                    updateFoodWall();
+                } else {
+                    foodWall.innerHTML = "";
+                }
+            }
+        }
+        
         function toggleFoodList() {
             const foodList = document.getElementById("food-list");
         
+            renderFoodList();
             foodList.classList.toggle("food-list-hidden");
         }
 
         function selectMeal(meal) {
+            currentMeal = meal;
+        
             document.getElementById("meal-title").textContent =
                 meal === "lunch" ? "午餐吃什麼？" : "晚餐咧？";
         
             availableFoods = foods.filter(function(food) {
                 return food.meals.includes(meal);
             });
-            
-            document.getElementById("food-list-title").textContent =
-                meal === "lunch" ? "☀️ 午餐清單" : "🌙 晚餐清單";
         
-            foodListItems.innerHTML = "";
-        
-            availableFoods.forEach(function(food) {
-                const item = document.createElement("div");
-                item.className = "food-list-item";
-                item.textContent = food.name;
-                foodListItems.appendChild(item);
-            });
+            renderFoodList();
         
             foodWall.classList.remove("lunch-wall", "dinner-wall");
-            foodWall.classList.add(meal === "lunch" ? "lunch-wall" : "dinner-wall");
-            
+            foodWall.classList.add(
+                meal === "lunch" ? "lunch-wall" : "dinner-wall"
+            );
+        
             updateFoodWall();
         
             document.getElementById("meal-selector").classList.add("hidden");
@@ -868,6 +982,11 @@
         }
     
         function chooseFood() {
+            if (availableFoods.length === 0) {
+                alert("目前沒有可抽選的餐點，請先確認 TOTAL LIST。");
+                return;
+            }
+        
             document.getElementById("start-button").style.visibility = "hidden";
             document.getElementById("back-button").classList.add("hidden");
 
